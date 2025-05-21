@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>CV Preview</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f2f2f2;
+    }
+
+    #cvContainer {
+      display: grid;
+      grid-template-columns: 30% 1fr;
+      gap: 20px;
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      max-width: 1000px;
+      margin: auto;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    .left-column {
+      border-right: 1px solid #ccc;
+      padding-right: 20px;
+    }
+
+    .right-column {
+      padding-left: 20px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 30px;
+      color: #333;
+    }
+
+    h3 {
+      border-bottom: 1px solid #ccc;
+      padding-bottom: 5px;
+      margin-top: 20px;
+      color: #333;
+    }
+
+    p {
+      margin: 8px 0;
+    }
+
+    button {
+      margin: 20px auto;
+      display: block;
+      padding: 12px 20px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    ul {
+      padding-left: 20px;
+    }
+
+    @media print {
+      body * {
+        visibility: hidden;
+      }
+
+      #cvContainer, #cvContainer * {
+        visibility: visible;
+      }
+
+      #cvContainer {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+
+      button {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <h2>CV Preview</h2>
+
+  <div id="cvContainer">
+    <div class="left-column">
+      <h3 id="fullName"></h3>
+      <p><strong>Date of Birth:</strong> <span id="dob"></span></p>
+      <p><strong>Nationality:</strong> <span id="nationality"></span></p>
+      <p><strong>Gender:</strong> <span id="gender"></span></p>
+      <p><strong>Email:</strong> <span id="email"></span></p>
+      <p><strong>Phone:</strong> <span id="phone"></span></p>
+      <p><strong>Address:</strong> <span id="address"></span></p>
+
+      <h3>About Me</h3>
+      <p id="aboutMe"></p>
+
+      <h3>Education</h3>
+      <div id="education"></div>
+
+      <h3>References</h3>
+      <p id="references"></p>
+    </div>
+
+    <div class="right-column">
+      <h3>Career Objective</h3>
+      <p id="objective"></p>
+
+      <h3>Work Experience</h3>
+      <div id="experience"></div>
+
+      <h3>Certifications</h3>
+      <p id="certifications"></p>
+
+      <h3>Skills</h3>
+      <div id="skills"></div>
+
+      <h3>Hobbies</h3>
+      <div id="hobbies"></div>
+    </div>
+  </div>
+
+  <button onclick="window.print()">Print / Save as PDF</button>
+
+  <script>
+    const params = new URLSearchParams(window.location.search);
+
+    const fill = (id, isList = false) => {
+      const element = document.getElementById(id);
+      const value = params.get(id) || '';
+      if (isList) {
+        const items = value.split('|').filter(item => item.trim() !== '');
+        if (items.length) {
+          const ul = document.createElement('ul');
+          items.forEach(item => {
+            const li = document.createElement('li');
+            li.textContent = item.trim();
+            ul.appendChild(li);
+          });
+          element.appendChild(ul);
+        } else {
+          element.innerHTML = "<em>No data</em>";
+        }
+      } else {
+        element.textContent = value || "N/A";
+      }
+    };
+
+    fill('fullName');
+    fill('dob');
+    fill('nationality');
+    fill('gender');
+    fill('email');
+    fill('phone');
+    fill('address');
+    fill('aboutMe');
+    fill('objective');
+    fill('certifications');
+    fill('references');
+
+    fill('education', true);
+    fill('experience', true);
+    fill('skills', true);
+    fill('hobbies', true);
+  </script>
+</body>
+</html>

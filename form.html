@@ -1,0 +1,155 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>CV Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      padding: 30px;
+      background-color: #f2f2f2;
+    }
+    h2 {
+      color: #333;
+    }
+    form {
+      background: #fff;
+      padding: 25px;
+      border-radius: 10px;
+      max-width: 700px;
+      margin: 20px auto;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    label {
+      display: block;
+      margin-top: 20px;
+      margin-bottom: 5px;
+      font-weight: bold;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 15px;
+      resize: vertical;
+    }
+    button, .add-btn {
+      margin-top: 10px;
+      padding: 10px 16px;
+      background-color: #4CAF50;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:hover, .add-btn:hover {
+      background-color: #45a049;
+    }
+    .add-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>CV Generator Form</h2>
+
+  <form id="cvForm" action="cv.html" method="GET">
+    <!-- Personal Particulars -->
+    <label for="fullName">Full Name:</label>
+    <input type="text" id="fullName" name="fullName" placeholder="e.g. John Kwame Mensah" required />
+
+    <label for="dob">Date of Birth:</label>
+    <input type="date" id="dob" name="dob" />
+
+    <label for="nationality">Nationality:</label>
+    <input type="text" id="nationality" name="nationality" placeholder="e.g. Ghanaian" />
+
+    <label for="gender">Gender:</label>
+    <input type="text" id="gender" name="gender" placeholder="e.g. Male" />
+
+    <!-- Contact -->
+    <label for="email">Email:</label>
+    <input type="email" id="email" name="email" placeholder="e.g. john@example.com" />
+
+    <label for="phone">Phone:</label>
+    <input type="tel" id="phone" name="phone" placeholder="e.g. +233 24 123 4567" />
+
+    <label for="address">Address:</label>
+    <textarea id="address" name="address" rows="2" placeholder="e.g. P.O. Box 42, Bongo - U/E"></textarea>
+
+    <!-- About Me -->
+    <label for="aboutMe">About Me:</label>
+    <textarea id="aboutMe" name="aboutMe" rows="3" placeholder="Brief intro about yourself..."></textarea>
+
+    <!-- Objective -->
+    <label for="objective">Career Objective:</label>
+    <textarea id="objective" name="objective" rows="3" placeholder="e.g. To contribute to digital education using my IT skills."></textarea>
+
+    <!-- Education -->
+    <label for="education">Education:</label>
+    <div id="education-container">
+      <textarea name="education[]" rows="4" placeholder="e.g. BSc ICT, UDS, 2018–2022"></textarea>
+    </div>
+    <button type="button" class="add-btn" onclick="addField('education-container', 'education[]')">Add Education</button>
+
+    <!-- Experience -->
+    <label for="experience">Work Experience:</label>
+    <div id="experience-container">
+      <textarea name="experience[]" rows="4" placeholder="e.g. ICT Teacher, Bongo SHS, 2023–present"></textarea>
+    </div>
+    <button type="button" class="add-btn" onclick="addField('experience-container', 'experience[]')">Add Experience</button>
+
+    <!-- Certifications -->
+    <label for="certifications">Certifications:</label>
+    <div id="certifications-container">
+      <textarea name="certifications[]" rows="3" placeholder="e.g. Google IT Support, Cisco CCNA, etc."></textarea>
+    </div>
+    <button type="button" class="add-btn" onclick="addField('certifications-container', 'certifications[]')">Add Certification</button>
+
+    <!-- Skills -->
+    <label for="skills">Skills:</label>
+    <div id="skills-container">
+      <textarea name="skills[]" rows="3" placeholder="e.g. Networking, Web Design, Troubleshooting"></textarea>
+    </div>
+    <button type="button" class="add-btn" onclick="addField('skills-container', 'skills[]')">Add Skill</button>
+
+    <!-- Hobbies -->
+    <label for="hobbies">Hobbies:</label>
+    <div id="hobbies-container">
+      <textarea name="hobbies[]" rows="2" placeholder="e.g. Reading, Coding, Football"></textarea>
+    </div>
+    <button type="button" class="add-btn" onclick="addField('hobbies-container', 'hobbies[]')">Add Hobby</button>
+
+    <!-- References -->
+    <label for="references">References:</label>
+    <div id="references-container">
+      <textarea name="references[]" rows="3" placeholder="e.g. Mr. Asare, Headmaster, Bongo SHS, 024XXXXXXX"></textarea>
+    </div>
+    <button type="button" class="add-btn" onclick="addField('references-container', 'references[]')">Add Reference</button>
+<br> <br>
+    <button type="submit">Generate CV</button>
+  </form>
+
+  <script>
+    function addField(containerId, fieldName) {
+      const container = document.getElementById(containerId);
+      const newField = document.createElement('textarea');
+      newField.name = fieldName;
+      newField.rows = 3;
+      newField.placeholder = "Add more...";
+      newField.style.marginTop = "10px";
+      newField.style.width = "100%";
+      newField.style.resize = "vertical";
+      container.appendChild(newField);
+    }
+  </script>
+
+</body>
+</html>
